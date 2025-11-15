@@ -13,8 +13,13 @@ class ItineraryController extends Controller
         if ($destination->user_id !== $request->user()->id) {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
+        
+        $itineraries = $destination->itineraries()
+            ->orderBy('day_number')
+            ->orderBy('schedule_time')
+            ->get();
 
-        return $destination->itineraries()->orderBy('day_number')->orderBy('schedule_time')->get();
+        return response()->json($itineraries);
     }
 
     public function store(Request $request)
