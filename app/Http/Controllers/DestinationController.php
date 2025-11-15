@@ -90,6 +90,34 @@ class DestinationController extends Controller
         return response()->json(['message' => 'Destination deleted successfully']);
     }
 
+    public function bulkUpdate(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'required|integer|exists:destinations,id',
+            'is_achieved' => 'required|boolean'
+        ]);
+
+        $user = $request->user();
+        $destinationIds = $request->ids;
+
+        // Verify all destinations belong to the user
+        $userDestinationIds = $user->destinations()->whereIn('id', $destinationIds)->pluck('id');
+
+        if (count($userDestinationIds) !== count($destinationIds)) {
+            return response()->json(['message' => 'Unauthorized to update some destinations'], 403);
+        }
+
+        Destination::whereIn('id', $userDestinationIds)->update([
+            'is_achieved' => $request->is_achieved
+        ]);
+
+        return response()->json([
+            'message' => 'Destinations updated successfully',
+            'updated_count' => count($userDestinationIds)
+        ]);
+    }
+
     public function bulkDelete(Request $request)
     {
         $request->validate([

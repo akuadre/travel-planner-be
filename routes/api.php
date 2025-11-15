@@ -23,6 +23,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/destinations/{destination}', [DestinationController::class, 'show']);
     Route::put('/destinations/{destination}', [DestinationController::class, 'update']);
     Route::delete('/destinations/{destination}', [DestinationController::class, 'destroy']);
+
+    Route::post('/destinations/bulk-update', [DestinationController::class, 'bulkUpdate']);
     Route::post('/destinations/bulk-delete', [DestinationController::class, 'bulkDelete']);
 
     // Itineraries - Model Binding
