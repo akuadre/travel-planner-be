@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Destination;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class DestinationController extends Controller
@@ -87,5 +88,44 @@ class DestinationController extends Controller
         $destination->delete();
 
         return response()->json(['message' => 'Destination deleted successfully']);
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'required|integer|exists:destinations,id'
+        ]);
+
+        $user = $request->user();
+        $destinationIds = $request->ids;
+
+        // Verify all destinations belong to the user
+        $userDestinationIds = $user->destinations()->whereIn('id', $destinationIds)->pluck('id');
+
+        if (count($userDestinationIds) !== count($destinationIds)) {
+            return response()->json(['message' => 'Unauthorized to delete some destinations'], 403);
+        }
+
+        // Use transaction for safety
+        DB::transaction(function () use ($userDestinationIds) {
+            // Get destinations with photos to delete files
+            $destinationsWithPhotos = Destination::whereIn('id', $userDestinationIds)
+                ->whereNotNull('photo')
+                ->get();
+
+            // Delete photo files
+            foreach ($destinationsWithPhotos as $destination) {
+                Storage::disk('public')->delete($destination->photo);
+            }
+
+            // Delete destinations
+            Destination::whereIn('id', $userDestinationIds)->delete();
+        });
+
+        return response()->json([
+            'message' => 'Destinations deleted successfully',
+            'deleted_count' => count($userDestinationIds)
+        ]);
     }
 }
