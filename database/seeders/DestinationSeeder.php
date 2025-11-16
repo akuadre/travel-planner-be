@@ -19,7 +19,8 @@ class DestinationSeeder extends Seeder
             [
                 'user_id' => $users[0]->id,
                 'title' => 'Trip ke Gunung Bromo',
-                'departure_date' => '2024-03-15',
+                'photo' => 'bromo.png',
+                'departure_date' => '2025-03-15',
                 'budget' => 2500000,
                 'duration_days' => 3,
                 'is_achieved' => true,
@@ -27,7 +28,8 @@ class DestinationSeeder extends Seeder
             [
                 'user_id' => $users[0]->id,
                 'title' => 'City Tour Jakarta',
-                'departure_date' => '2024-06-01',
+                'photo' => 'jakarta.png',
+                'departure_date' => '2025-06-01',
                 'budget' => 3000000,
                 'duration_days' => 4,
                 'is_achieved' => false,
@@ -37,7 +39,8 @@ class DestinationSeeder extends Seeder
             [
                 'user_id' => $users[1]->id,
                 'title' => 'Liburan ke Pantai Kuta Bali',
-                'departure_date' => '2024-04-20',
+                'photo' => 'pantaibali.png',
+                'departure_date' => '2025-04-20',
                 'budget' => 5000000,
                 'duration_days' => 5,
                 'is_achieved' => false,
@@ -45,7 +48,8 @@ class DestinationSeeder extends Seeder
             [
                 'user_id' => $users[1]->id,
                 'title' => 'Wisata Kuliner Bandung',
-                'departure_date' => '2024-07-12',
+                'photo' => 'bandung.png',
+                'departure_date' => '2025-07-12',
                 'budget' => 2000000,
                 'duration_days' => 3,
                 'is_achieved' => true,
@@ -55,7 +59,8 @@ class DestinationSeeder extends Seeder
             [
                 'user_id' => $users[2]->id,
                 'title' => 'Camping di Gunung Cikuray',
-                'departure_date' => '2024-05-10',
+                'photo' => 'cikuray.png',
+                'departure_date' => '2025-05-10',
                 'budget' => 1500000,
                 'duration_days' => 2,
                 'is_achieved' => false,
@@ -63,7 +68,8 @@ class DestinationSeeder extends Seeder
             [
                 'user_id' => $users[2]->id,
                 'title' => 'Backpacker Jogja',
-                'departure_date' => '2024-08-05',
+                'photo' => 'jogja.png',
+                'departure_date' => '2025-08-05',
                 'budget' => 1800000,
                 'duration_days' => 4,
                 'is_achieved' => true,
