@@ -23,7 +23,7 @@ class DestinationSeeder extends Seeder
                 'departure_date' => '2026-03-15',
                 'budget' => 2500000,
                 'duration_days' => 3,
-                'is_achieved' => true,
+                'is_achieved' => false,
             ],
             [
                 'user_id' => $users[0]->id,
@@ -52,7 +52,7 @@ class DestinationSeeder extends Seeder
                 'departure_date' => '2026-07-12',
                 'budget' => 2000000,
                 'duration_days' => 3,
-                'is_achieved' => true,
+                'is_achieved' => false,
             ],
 
             // User 3 has 2 destinations
@@ -72,7 +72,7 @@ class DestinationSeeder extends Seeder
                 'departure_date' => '2026-08-05',
                 'budget' => 1800000,
                 'duration_days' => 4,
-                'is_achieved' => true,
+                'is_achieved' => false,
             ],
         ];
 
