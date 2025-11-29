@@ -29,7 +29,9 @@ class DestinationController extends Controller
         $data['user_id'] = $request->user()->id;
 
         if ($request->hasFile('photo')) {
-            $data['photo'] = $request->file('photo')->store('destinations', 'public');
+            $path = $request->file('photo')->store('destinations', 'public');
+            // Hapus prefix 'destinations/' dari path
+            $data['photo'] = str_replace('destinations/', '', $path);
         }
 
         $destination = Destination::create($data);
@@ -64,10 +66,14 @@ class DestinationController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('photo')) {
+            // Hapus foto lama jika ada
             if ($destination->photo) {
-                Storage::disk('public')->delete($destination->photo);
+                Storage::disk('public')->delete('destinations/' . $destination->photo);
             }
-            $data['photo'] = $request->file('photo')->store('destinations', 'public');
+
+            $path = $request->file('photo')->store('destinations', 'public');
+            // Hapus prefix 'destinations/' dari path
+            $data['photo'] = str_replace('destinations/', '', $path);
         }
 
         $destination->update($data);
@@ -82,7 +88,7 @@ class DestinationController extends Controller
         }
 
         if ($destination->photo) {
-            Storage::disk('public')->delete($destination->photo);
+            Storage::disk('public')->delete('destinations/' . $destination->photo);
         }
 
         $destination->delete();
@@ -142,9 +148,9 @@ class DestinationController extends Controller
                 ->whereNotNull('photo')
                 ->get();
 
-            // Delete photo files
+            // Delete photo files - FIXED: tambahkan folder destinations/
             foreach ($destinationsWithPhotos as $destination) {
-                Storage::disk('public')->delete($destination->photo);
+                Storage::disk('public')->delete('destinations/' . $destination->photo);
             }
 
             // Delete destinations
