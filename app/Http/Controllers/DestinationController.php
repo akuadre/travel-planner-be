@@ -29,9 +29,9 @@ class DestinationController extends Controller
         $data['user_id'] = $request->user()->id;
 
         if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('destinations', 'public');
-            // Hapus prefix 'destinations/' dari path
-            $data['photo'] = str_replace('destinations/', '', $path);
+            $fileName = $request->file('photo')->hashName(); // Generate unique name
+            $request->file('photo')->storeAs('destinations', $fileName, 'public');
+            $data['photo'] = $fileName; // Hanya nama file: "abc123.jpg"
         }
 
         $destination = Destination::create($data);
@@ -71,9 +71,10 @@ class DestinationController extends Controller
                 Storage::disk('public')->delete('destinations/' . $destination->photo);
             }
 
-            $path = $request->file('photo')->store('destinations', 'public');
-            // Hapus prefix 'destinations/' dari path
-            $data['photo'] = str_replace('destinations/', '', $path);
+            // Simpan file baru
+            $fileName = $request->file('photo')->hashName();
+            $request->file('photo')->storeAs('destinations', $fileName, 'public');
+            $data['photo'] = $fileName;
         }
 
         $destination->update($data);
@@ -114,13 +115,18 @@ class DestinationController extends Controller
             return response()->json(['message' => 'Unauthorized to update some destinations'], 403);
         }
 
+        // Update status achieved
         Destination::whereIn('id', $userDestinationIds)->update([
             'is_achieved' => $request->is_achieved
         ]);
 
+        // Return updated destinations
+        $updatedDestinations = Destination::whereIn('id', $userDestinationIds)->get();
+
         return response()->json([
             'message' => 'Destinations updated successfully',
-            'updated_count' => count($userDestinationIds)
+            'updated_count' => count($userDestinationIds),
+            'destinations' => $updatedDestinations
         ]);
     }
 
@@ -148,7 +154,7 @@ class DestinationController extends Controller
                 ->whereNotNull('photo')
                 ->get();
 
-            // Delete photo files - FIXED: tambahkan folder destinations/
+            // Delete photo files
             foreach ($destinationsWithPhotos as $destination) {
                 Storage::disk('public')->delete('destinations/' . $destination->photo);
             }
