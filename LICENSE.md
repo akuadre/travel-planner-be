@@ -1,4 +1,3 @@
-```text
 MIT License
 
 Copyright (c) 2024 Travel Planner Contributors
