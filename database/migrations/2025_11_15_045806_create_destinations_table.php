@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('title');
             $table->date('departure_date');
-            $table->decimal('budget', 10, 2);
+            $table->bigInteger('budget');
             $table->integer('duration_days');
             $table->boolean('is_achieved')->default(false);
             $table->timestamps();
