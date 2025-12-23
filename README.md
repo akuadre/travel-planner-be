@@ -34,7 +34,7 @@ Pastikan server atau komputer lokal Anda memiliki:
 
 1.  **Clone Repository**
     ```bash
-    git clone [https://github.com/username-anda/travel-planner-be.git](https://github.com/username-anda/travel-planner-be.git)
+    git clone https://github.com/akuadre/travel-planner-be.git
     cd travel-planner-be
     ```
 
