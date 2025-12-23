@@ -19,7 +19,7 @@ Backend API untuk aplikasi Travel Planner. Project ini dibangun menggunakan fram
 * **Framework**: [Laravel](https://laravel.com/) ^12.0
 * **Language**: PHP ^8.2
 * **Auth**: Laravel Sanctum ^4.0
-* **Database**: MySQL / MariaDB / SQLite (Default Laravel supports multiple)
+* **Database**: MySQL / MariaDB (Default Laravel supports multiple)
 * **Testing**: PHPUnit & Pest (via Laravel built-in tests)
 
 ## 📋 Prasyarat
