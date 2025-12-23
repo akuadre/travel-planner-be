@@ -1,59 +1,148 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Travel Planner (Backend API)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Backend API untuk aplikasi Travel Planner. Project ini dibangun menggunakan framework **Laravel** dan berfungsi sebagai penyedia data RESTful untuk aplikasi frontend.
 
-## About Laravel
+## 🌟 Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* **Otentikasi Aman**: Menggunakan **Laravel Sanctum** untuk sistem login berbasis token (Bearer Token).
+* **Manajemen Pengguna**: Registrasi, Login, Logout, dan pengambilan profil pengguna.
+* **Manajemen Destinasi**:
+    * CRUD (Create, Read, Update, Delete) data destinasi wisata.
+    * Fitur *Bulk Update* dan *Bulk Delete* untuk pengelolaan data massal.
+* **Manajemen Itinerary**:
+    * Membuat jadwal perjalanan yang terhubung dengan destinasi tertentu.
+    * Mengelola detail itinerary (CRUD).
+* **API Resource**: Struktur respons JSON yang konsisten.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠 Teknologi
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* **Framework**: [Laravel](https://laravel.com/) ^12.0
+* **Language**: PHP ^8.2
+* **Auth**: Laravel Sanctum ^4.0
+* **Database**: MySQL / MariaDB / SQLite (Default Laravel supports multiple)
+* **Testing**: PHPUnit & Pest (via Laravel built-in tests)
 
-## Learning Laravel
+## 📋 Prasyarat
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Pastikan server atau komputer lokal Anda memiliki:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* [PHP](https://www.php.net/) >= 8.2
+* [Composer](https://getcomposer.org/)
+* Database Server (MySQL, PostgreSQL, atau SQLite)
 
-## Laravel Sponsors
+## 🚀 Instalasi dan Penggunaan
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1.  **Clone Repository**
+    ```bash
+    git clone [https://github.com/username-anda/travel-planner-be.git](https://github.com/username-anda/travel-planner-be.git)
+    cd travel-planner-be
+    ```
 
-### Premium Partners
+2.  **Install Dependencies**
+    Jalankan perintah berikut untuk mengunduh library vendor:
+    ```bash
+    composer install
+    ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+3.  **Konfigurasi Environment**
+    Salin file contoh konfigurasi dan sesuaikan dengan database Anda:
+    ```bash
+    cp .env.example .env
+    ```
+    Buka file `.env` dan atur koneksi database:
+    ```ini
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=travel_planner
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
 
-## Contributing
+4.  **Setup Aplikasi (Shortcut)**
+    Project ini memiliki script setup otomatis di `composer.json` yang akan men-generate key dan menjalankan migrasi:
+    ```bash
+    composer run setup
+    ```
+    *Atau secara manual:*
+    ```bash
+    php artisan key:generate
+    php artisan migrate
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5.  **Jalankan Server**
+    ```bash
+    php artisan serve
+    ```
+    API akan berjalan di `http://localhost:8000`.
 
-## Code of Conduct
+## 📡 Dokumentasi API
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Berikut adalah daftar endpoint utama yang tersedia:
 
-## Security Vulnerabilities
+### Autentikasi
+| Method | Endpoint | Deskripsi |
+| :--- | :--- | :--- |
+| POST | `/api/register` | Mendaftarkan pengguna baru |
+| POST | `/api/login` | Masuk dan mendapatkan Token |
+| GET | `/api/user` | Mendapatkan data user login (Perlu Token) |
+| POST | `/api/logout` | Menghapus token akses (Perlu Token) |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Destinasi (Perlu Token)
+| Method | Endpoint | Deskripsi |
+| :--- | :--- | :--- |
+| GET | `/api/destinations` | Melihat daftar destinasi |
+| POST | `/api/destinations` | Menambah destinasi baru |
+| GET | `/api/destinations/{id}` | Detail destinasi |
+| PUT | `/api/destinations/{id}` | Update destinasi |
+| DELETE | `/api/destinations/{id}` | Hapus destinasi |
+| POST | `/api/destinations/bulk-update` | Update banyak data sekaligus |
 
-## License
+### Itinerary (Perlu Token)
+| Method | Endpoint | Deskripsi |
+| :--- | :--- | :--- |
+| GET | `/api/destinations/{id}/itineraries` | Lihat itinerary berdasarkan destinasi |
+| POST | `/api/itineraries` | Tambah itinerary |
+| PUT | `/api/itineraries/{id}` | Update itinerary |
+| DELETE | `/api/itineraries/{id}` | Hapus itinerary |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🧪 Testing
+
+Untuk menjalankan pengujian otomatis (Unit & Feature test):
+
+```bash
+php artisan test
+```
+
+## 📂 Struktur Folder Utama
+
+Berikut adalah struktur folder utama dari aplikasi ini:
+
+```text
+travel-planner-be/
+├── app/
+│   ├── Http/Controllers/    # Logika bisnis (AuthController, DestinationController)
+│   ├── Models/              # Model Database (User, Destination, Itinerary)
+├── database/
+│   ├── migrations/          # Struktur tabel database
+│   ├── seeders/             # Data dummy
+├── routes/
+│   ├── api.php              # Definisi route API
+│   └── web.php              # Route web standar
+├── tests/                   # Folder pengujian
+└── .env                     # Konfigurasi environment
+```
+
+## 🤝 Kontribusi
+
+Kontribusi selalu diterima! Jika Anda ingin berkontribusi:
+
+1. Fork repository ini.
+2. Buat branch fitur baru (git checkout -b fitur-api-baru).
+3. Commit perubahan Anda (git commit -m 'Menambahkan endpoint baru').
+4. Push ke branch tersebut (git push origin fitur-api-baru).
+5. Buat Pull Request.
+
+## 📄 Lisensi
+
+Project ini bersifat open-sourced di bawah lisensi MIT.
