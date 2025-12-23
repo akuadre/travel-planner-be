@@ -2,6 +2,11 @@
 
 Backend API untuk aplikasi Travel Planner. Project ini dibangun menggunakan framework **Laravel** dan berfungsi sebagai penyedia data RESTful untuk aplikasi frontend.
 
+## 🎥 Video Penjelasan
+
+Link video demo dan penjelasan aplikasi:
+https://youtu.be/Fxz7Sb3CI_I
+
 ## 🌟 Fitur Utama
 
 * **Otentikasi Aman**: Menggunakan **Laravel Sanctum** untuk sistem login berbasis token (Bearer Token).
