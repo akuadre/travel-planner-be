@@ -8,11 +8,6 @@ Frontend dibangun menggunakan **React.js** dan berada di repository terpisah:
 
 Frontend Repository  
 https://github.com/akuadre/travel-planner-fe
-  
-## 🎥 Video Penjelasan
-
-Link video demo dan penjelasan aplikasi:
-https://youtu.be/Fxz7Sb3CI_I
 
 ## 🌟 Fitur Utama
 
@@ -154,6 +149,11 @@ Kontribusi selalu diterima! Jika Anda ingin berkontribusi:
 3. Commit perubahan Anda (git commit -m 'Menambahkan endpoint baru').
 4. Push ke branch tersebut (git push origin fitur-api-baru).
 5. Buat Pull Request.
+  
+## 🎥 Video Penjelasan
+
+Link video demo dan penjelasan aplikasi:
+https://youtu.be/Fxz7Sb3CI_I
 
 ## 📄 Lisensi
 
