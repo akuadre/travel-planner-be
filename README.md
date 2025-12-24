@@ -5,8 +5,6 @@ Backend API untuk aplikasi Travel Planner. Project ini dibangun menggunakan fram
 ## 🎨 Repository Frontend (Terpisah)
 
 Frontend dibangun menggunakan **React.js** dan berada di repository terpisah:
-
-Frontend Repository  
 https://github.com/akuadre/travel-planner-fe
   
 ## 🎥 Video Penjelasan
