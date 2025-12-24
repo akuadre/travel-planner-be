@@ -2,16 +2,12 @@
 
 Backend API untuk aplikasi Travel Planner. Project ini dibangun menggunakan framework **Laravel** dan berfungsi sebagai penyedia data RESTful untuk aplikasi frontend.
 
-> ⚠️ **Catatan**
-> Aplikasi **Frontend dan Backend dipisahkan**.  
-> Repository ini **khusus Backend (API)**.
-
 ## 🎨 Repository Frontend (Terpisah)
 
 Frontend dibangun menggunakan **React.js** dan berada di repository terpisah:
 
-- Frontend Repository  
-  https://github.com/akuadre/travel-planner-fe
+Frontend Repository  
+https://github.com/akuadre/travel-planner-fe
   
 ## 🎥 Video Penjelasan
 
